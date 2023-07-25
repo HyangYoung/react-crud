@@ -11,6 +11,7 @@ app.use(express.static(path.join(__dirname, "../client/build")));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+const { Post } = require("./Model/Post")
 
 app.listen(port, () => {
     mongoose.connect(process.env.MONGO_URI)
@@ -30,6 +31,14 @@ app.get('*', (req, res) => {
 })
 
 app.post("/api/test", (req, res) =>{
-    console.log(req.body);
-    res.status(200).json({ success: true, text: "Hi!" });
+    const communityPost = new Post({ title: 'test', content: 'This is test' });
+    communityPost.save().then(() => {
+        res.status(200).json({ success: true, text: "Hi!" });
+    });
 })
+
+
+/*
+1. Post MongoDB Model
+2. Client CSS (Bootstrap, Emotion)
+ */
