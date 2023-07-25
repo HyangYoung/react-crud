@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect} from "react"
+import {UploadButtonDiv, UploadDiv, UploadForm} from "../Style/UploadCSS.js"
 
 function Upload(props) {
 
@@ -15,33 +16,43 @@ function Upload(props) {
         // 컴포넌트가 나타날 때 실행될 코드
         return () => {
             //컴포넌트가 죽을 때 실행될 코드
-            console.log("content가 바뀌었습니다.")
+            console.log("content has updated")
         };
     }, [Content] )
     // 조건 상황
 
 
     return(
-       <div
-        style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            width: "100%",
-            marginTop: "30px",
-        }}>
-           <input type="test"
-                  value={Content}
-                  onChange={(event) => {
-                      setContent(event.currentTarget.value);
-                  }}/>
-           <button
-               onClick={()=>{
-                   onSubmit();
-               }}
-               style={{ marginTop: "1rem" }}
-           >Submit</button>
-       </div>
+       <UploadDiv>
+           <UploadForm>
+               <label htmlFor="label">Title</label>
+               <input
+                   id = "title"
+                   type="text"
+                   value={Content}
+                   onChange={(event) => {
+                       setContent(event.currentTarget.value);
+                   }}/>
+               <label htmlFor="content">Content</label>
+               <textarea
+                   type="text"
+                   id = "content"
+                   value={Content}
+                   onChange={(event) => {
+                       setContent(event.currentTarget.value);
+                   }}/>
+
+               <UploadButtonDiv>
+                   <button
+                       onClick={()=>{
+                       onSubmit();
+                   }}> Submit
+                   </button>
+                   </UploadButtonDiv>
+           </UploadForm>
+
+
+       </UploadDiv>
     );
 }
 
