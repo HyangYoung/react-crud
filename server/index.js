@@ -30,10 +30,14 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, "../client/build/index.html"));
 })
 
-app.post("/api/test", (req, res) =>{
-    const communityPost = new Post({ title: 'test', content: 'This is test' });
+app.post("/api/post/submit", (req, res) => {
+    let temp = req.body;
+    console.log(temp);
+    const communityPost = new Post(temp);
     communityPost.save().then(() => {
-        res.status(200).json({ success: true, text: "Hi!" });
+        res.status(200).json({success: true});
+    }).catch((err) => {
+        res.status(400).json({success: false});
     });
 })
 
