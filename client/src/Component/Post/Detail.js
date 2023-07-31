@@ -16,8 +16,9 @@ function Detail() {
             .post("/api/post/detail", body)
             .then((response) => {
                 if(response.data.success){
-                    setPostInfo(response.data.post);
+                    setPostInfo(response.data.postList);
                     setFlag(true);
+                    console.log(response.data.postList);
                 }
             })
             .catch((err) => {
@@ -27,16 +28,16 @@ function Detail() {
 
     useEffect(() => {
         if(Flag){
-            console.log(PostInfo.title)
+            console.log(PostInfo?.title)
         }
     }, [Flag, PostInfo]);
 
     return (
         <div>
-            {Flag ? (
+            {PostInfo?.length ? (
                     <div>
-                        {PostInfo.title}
-                        {PostInfo.content}
+                        {PostInfo?.title}
+                        {PostInfo?.content}
                     </div>
                 ) :
                 <Spinner animation="border" role="status">
