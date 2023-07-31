@@ -6,7 +6,8 @@ dotenv.config();
 const postSchema = new mongoose.Schema({
     title: String,
     content: String,
-}, { collection: "Posts" });
+    postNum: Number,
+}, { collection: "posts" });
 
 const Post = mongoose.model('Post', postSchema);
 
